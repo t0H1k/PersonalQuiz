@@ -21,23 +21,22 @@ class ResultViewController: UIViewController {
     }
     
     private func calculateResult() {
-        var receivedResponses: [Animal: Int] = [:]
+        var userResponses: [Animal: Int] = [:]
         let answerChose = answersChose.map{ $0.animal }
         
         for answer in answerChose {
-            receivedResponses[answer] = (receivedResponses[answer] ?? 0) + 1
+            userResponses[answer] = (userResponses[answer] ?? 0) + 1
         }
         
-        let answersSorted = receivedResponses.sorted (by: {
-            (pair1, pair2) -> Bool in
-            return pair1.value > pair2.value
-        })
+        let answersSorted = userResponses.sorted {
+            (pairOne, pairTwo) -> Bool in
+            return pairOne.value > pairTwo.value
+        }
         
-        let popularAnswerDetails = answersSorted.first?.key
+        let finalAnswer = answersSorted.first?.key
         
-        currentAnswerLabel.text = "Вы - \(popularAnswerDetails?.rawValue.description ?? "")"
-        detailsCurrentAnswersLabel.text = popularAnswerDetails?.definition
-        
+        currentAnswerLabel.text = "Вы - \(finalAnswer?.rawValue.description ?? "")"
+        detailsCurrentAnswersLabel.text = finalAnswer?.definition
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
