@@ -20,6 +20,10 @@ class ResultViewController: UIViewController {
         calculateResult()
     }
     
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.dismiss(animated: true)
+    }
+
     private func calculateResult() {
         var userResponses: [Animal: Int] = [:]
         let answerChose = answersChose.map{ $0.animal }
@@ -39,10 +43,6 @@ class ResultViewController: UIViewController {
         detailsCurrentAnswersLabel.text = finalAnswer?.definition
     }
     
-    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        navigationController?.dismiss(animated: true)
-    }
-
     deinit {
         print("\(type(of: self)) has been deallocated")
     }
